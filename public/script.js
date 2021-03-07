@@ -18,6 +18,18 @@ class Calculator {
     }
     return ans
   }
+  getsqrt(number)
+  {
+    return Math.sqrt(number)
+  }
+  getexponent(number1,number2)
+  {
+      return number1 ** number2
+  }
+  getlog(number)
+  {
+      return Math.log(number)
+  }
   clear() {
     this.currentOperand = ''
     this.previousOperand = ''
@@ -56,7 +68,7 @@ class Calculator {
      const current = parseFloat(this.currentOperand)
      if(isNaN(prev) || isNaN(current))
      return
-     computation = prev ** current
+     computation = this.getexponent(prev,current)
    }
    else
    {
@@ -68,10 +80,10 @@ class Calculator {
         computation = this.factorial(current)
         break
       case '√':
-        computation = Math.sqrt(current)
+        computation = this.getsqrt(current)
         break
       case 'ln(x)':
-        computation = Math.log(current)
+        computation = this.getlog(current)
         break
       default:
         return
@@ -135,18 +147,33 @@ operationButtons.forEach(button => {
     calculator.updateDisplay()
   })
 })
+if(equalsButton)
+{
+  equalsButton.addEventListener('click', button => {
+    calculator.compute()
+    calculator.updateDisplay()
+  })
+}
 
-equalsButton.addEventListener('click', button => {
-  calculator.compute()
-  calculator.updateDisplay()
-})
+if(allClearButton)
+{
+  allClearButton.addEventListener('click', button => {
+    calculator.clear()
+    calculator.updateDisplay()
+  })
+}
 
-allClearButton.addEventListener('click', button => {
-  calculator.clear()
-  calculator.updateDisplay()
-})
+if(deleteButton)
+{
+  deleteButton.addEventListener('click', button => {
+    calculator.delete()
+    calculator.updateDisplay()
+  })
+}
 
-deleteButton.addEventListener('click', button => {
-  calculator.delete()
-  calculator.updateDisplay()
-})
+
+// calculator.currentOperand='16'
+// calculator.previousOperand = ''
+// calculator.operation = '√'
+// console.log(calculator.compute())
+exports.calculator = calculator
