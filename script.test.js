@@ -1,5 +1,5 @@
  const calc = require('./public/script')
- 
+
 
   test("Factorial of number 5 is 20",()=>{
       expect(calc.calculator.factorial(5)).toBe(120)
